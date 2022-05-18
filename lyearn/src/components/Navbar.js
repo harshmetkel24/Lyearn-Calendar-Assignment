@@ -1,12 +1,16 @@
+// React imports
 import React from "react";
 
+// MUI imports
 import { Button, AppBar, Grid } from "@mui/material";
 import { Box } from "@mui/system";
+
+// Local imports
 import { NavButton, SearchButton } from "../elements/Buttons";
 
 const Navbar = () => {
   return (
-    <AppBar color="transparent">
+    <AppBar position="static" mb={2} color="transparent">
       <Grid container p={1}>
         <Grid item xs={9}>
           <Grid container spacing={3}>
