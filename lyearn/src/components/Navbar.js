@@ -7,12 +7,24 @@ import { Box } from "@mui/system";
 
 // Local imports
 import { NavButton, SearchButton } from "../elements/Buttons";
+import Menu from "../elements/Menu";
 
 const Navbar = () => {
   return (
-    <AppBar position="static" mb={2} color="transparent">
-      <Grid container p={1}>
-        <Grid item xs={9}>
+    <AppBar position="static" color="transparent">
+      <Grid container p={1} sx={{ justifyContent: "space-between" }}>
+        <Menu />
+        <Grid
+          item
+          lg={9}
+          xs={6}
+          sx={{
+            display: {
+              lg: "inline-flex",
+              xs: "none",
+            },
+          }}
+        >
           <Grid container spacing={3}>
             <Grid item>
               <Button
@@ -54,8 +66,7 @@ const Navbar = () => {
             </Grid>
           </Grid>
         </Grid>
-
-        <Grid item xs={3}>
+        <Grid item lg={3} xs={6}>
           <SearchButton />
         </Grid>
       </Grid>

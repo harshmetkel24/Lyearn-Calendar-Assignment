@@ -38,9 +38,9 @@ const Calendar = () => {
 
   return (
     <>
-      <Container fluid fullWidth>
-        <Grid container p={4}>
-          <Grid item xs={8}>
+      <Container fluid>
+        <Grid pt={4} container spacing={4}>
+          <Grid item lg={8} xs={12}>
             {data && (
               <Box>
                 {data.data.map((event) => (
@@ -51,13 +51,13 @@ const Calendar = () => {
             )}
             {!data && <MainArticleSkeleton />}
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} lg={4}>
             {/* {data && <Box>hello</Box>} */}
             {1 && (
               <Skeleton
                 variant="rectangular"
-                width={400}
-                height={400}
+                width={300}
+                height={300}
                 animation="wave"
               />
             )}
