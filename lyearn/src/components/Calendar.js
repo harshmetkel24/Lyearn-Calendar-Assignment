@@ -42,7 +42,7 @@ const Calendar = () => {
               <Grid container>
                 {data.map((day) => (
                   <Grid item xs={12}>
-                    <Typography variant="h6" component="h2" key={day._id}>
+                    <Typography variant="h5" component="h2" key={day._id}>
                       {day.date}
                     </Typography>
                     <Box>

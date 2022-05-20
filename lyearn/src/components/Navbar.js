@@ -2,18 +2,19 @@
 import React from "react";
 
 // MUI imports
-import { Button, AppBar, Grid } from "@mui/material";
+import { AppBar, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 
 // Local imports
 import { NavButton, SearchButton } from "../elements/Buttons";
-import Menu from "../elements/Menu";
+import MenuElement from "../elements/Menu";
+import SeatsMenu from "../elements/SeatsMenu";
 
 const Navbar = () => {
   return (
     <AppBar position="static" color="transparent">
       <Grid container p={1} sx={{ justifyContent: "space-between" }}>
-        <Menu />
+        <MenuElement />
         <Grid
           item
           lg={9}
@@ -27,16 +28,7 @@ const Navbar = () => {
         >
           <Grid container spacing={3}>
             <Grid item>
-              <Button
-                sx={{
-                  borderRadius: "2em",
-                  textTransform: "none",
-                  fontWeight: "500",
-                }}
-                variant="outlined"
-              >
-                Seats
-              </Button>
+              <SeatsMenu />
             </Grid>
             <Grid item>
               <Box

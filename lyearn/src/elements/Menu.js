@@ -1,8 +1,7 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { Button, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import SeatsMenu from "./SeatsMenu";
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,16 +40,8 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem
-          onClick={handleClose}
-          sx={{
-            backgroundColor: "#2196f3",
-            "&:hover": {
-              backgroundColor: "#4dabf5",
-            },
-          }}
-        >
-          Seats
+        <MenuItem onClick={handleClose}>
+          <SeatsMenu />
         </MenuItem>
         <MenuItem onClick={handleClose}>Design</MenuItem>
         <MenuItem onClick={handleClose}>Product Management</MenuItem>

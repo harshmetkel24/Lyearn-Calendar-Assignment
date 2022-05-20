@@ -8,7 +8,6 @@ import WeekendIcon from "@mui/icons-material/Weekend";
 // Local imports
 
 const Event = ({ data }) => {
-  console.log(data.src);
   return (
     <>
       <Grid
@@ -94,32 +93,52 @@ const Event = ({ data }) => {
               {`${Math.floor(Math.random() * 60)} mins`}
             </Typography>
           </Box>
-          <Box sx={{ display: "flex", gap: "1em" }}>
+          {!data.status.registered && (
+            <Box sx={{ display: "flex", gap: "1em" }}>
+              <Button
+                sx={{
+                  fontSize: {
+                    md: "1em",
+                    xs: "0.7em",
+                  },
+                  color: "#000",
+                  textTransform: "none",
+                }}
+                startIcon={<PeopleOutlineIcon sx={{ color: "#999999" }} />}
+              >
+                {`${data.status.attending} attending`}
+              </Button>
+              <Button
+                sx={{
+                  fontSize: {
+                    md: "1em",
+                    xs: "0.7em",
+                  },
+                  color: "#000",
+                  textTransform: "none",
+                }}
+                startIcon={<WeekendIcon />}
+              >
+                {`${data.status.seats} seats left`}
+              </Button>
+            </Box>
+          )}
+          {data.status.registered && (
             <Button
+              variant="contained"
+              size="small"
               sx={{
-                fontSize: {
-                  md: "1em",
-                  xs: "0.5em",
+                borderRadius: 4,
+                fontWeight: "600",
+                backgroundColor: "#444444",
+                "&:hover": {
+                  backgroundColor: "#444444",
                 },
               }}
-              startIcon={<PeopleOutlineIcon />}
-              color="info"
             >
-              {`${Math.floor(Math.random() * 150)} attending`}
+              Registered
             </Button>
-            <Button
-              sx={{
-                fontSize: {
-                  md: "1em",
-                  xs: "0.5em",
-                },
-              }}
-              startIcon={<WeekendIcon />}
-              color="warning"
-            >
-              {`${Math.floor(Math.random() * 100)} seats`}
-            </Button>
-          </Box>
+          )}
         </Grid>
       </Grid>
     </>
