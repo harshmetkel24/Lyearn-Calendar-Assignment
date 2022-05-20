@@ -11,8 +11,8 @@
 # production
 
 # remove static files
-# /src
-# /public
+/src
+/public
 
 # misc
 .DS_Store
