@@ -18,7 +18,11 @@ const Calendar = () => {
   };
 
   const fetchData = () => {
-    fetch("http://localhost:4000/events", options)
+    const url =
+      process.env.NODE_ENV == "production"
+        ? "/events/"
+        : "http://localhost:4000/events";
+    fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
         setData(response);
