@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV == "production") {
   const path = require("path");
 
   app.get("/", function (req, res) {
-    app.use(express.static(path.join(__dirname, "lyearn", "build")));
+    app.use(express.static(path.resolve(__dirname, "lyearn", "build")));
     res.sendFile(path.resolve(__dirname, "lyearn", "build", "index.html"));
   });
 }
