@@ -8,6 +8,7 @@ import { Container } from "@mui/system";
 // Local imports
 import MainArticleSkeleton from "../skeletons/MainArticleSkeleton";
 import Event from "./Event";
+import CalendarComponent from "./CalendarComponent";
 
 const Calendar = () => {
   const [data, setData] = useState(null);
@@ -19,21 +20,37 @@ const Calendar = () => {
     },
   };
 
-  const fetchData = () => {
-    fetch(
-      "https://events-happened-in-world.p.rapidapi.com/search?date=5&month=4&limit=5",
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setData(response);
-        console.log(response);
-      })
-      .catch((err) => console.error(err));
-  };
+  // const fetchData = () => {
+  //   fetch(
+  //     "https://events-happened-in-world.p.rapidapi.com/search?date=5&month=4&limit=5",
+  //     options
+  //   )
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       setData(response);
+  //       console.log(response);
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    setTimeout(() => {
+      const data = {
+        data: [
+          {
+            event: "lorem empsum text 1",
+          },
+          {
+            event: "lorem empsum text 2",
+          },
+          {
+            event: "lorem empsum text 3",
+          },
+        ],
+      };
+      setData(data);
+    }, 2000);
   }, []);
 
   return (
@@ -52,12 +69,16 @@ const Calendar = () => {
             {!data && <MainArticleSkeleton />}
           </Grid>
           <Grid item xs={12} lg={4}>
-            {/* {data && <Box>hello</Box>} */}
-            {1 && (
+            {data && (
+              <Box>
+                <CalendarComponent />
+              </Box>
+            )}
+            {!data && (
               <Skeleton
                 variant="rectangular"
-                width={300}
-                height={300}
+                width={350}
+                height={350}
                 animation="wave"
               />
             )}
