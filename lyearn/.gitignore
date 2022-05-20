@@ -9,7 +9,10 @@
 /coverage
 
 # production
-/build
+
+# remove static files
+/src
+/public
 
 # misc
 .DS_Store

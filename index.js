@@ -7,6 +7,14 @@ const PORT = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+if (process.env.NODE_ENV === "production") {
+  const path = require("path");
+
+  app.get("/", function (req, res) {
+    app.use(express.static(path.join(__dirname, "lyearn", "build")));
+    res.sendFile(path.resolve(__dirname, "lyearn", "build", "index.html"));
+  });
+}
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "DELETE, PUT");
