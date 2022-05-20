@@ -18,7 +18,7 @@ const Calendar = () => {
   };
 
   const fetchData = () => {
-    fetch("http://localhost:4000/", options)
+    fetch("/", options)
       .then((response) => response.json())
       .then((response) => {
         setData(response);
