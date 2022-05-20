@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 // MUI imports
-import { Grid, Skeleton, Box } from "@mui/material";
+import { Grid, Skeleton, Box, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 
 // Local imports
@@ -14,42 +14,22 @@ const Calendar = () => {
   const [data, setData] = useState(null);
   const options = {
     method: "GET",
-    headers: {
-      "X-RapidAPI-Host": "events-happened-in-world.p.rapidapi.com",
-      "X-RapidAPI-Key": "47ea579b3emsh06e61e48b778ac2p1904b8jsn37e719d989e6",
-    },
+    Accept: "application/json",
   };
 
-  // const fetchData = () => {
-  //   fetch(
-  //     "https://events-happened-in-world.p.rapidapi.com/search?date=5&month=4&limit=5",
-  //     options
-  //   )
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       setData(response);
-  //       console.log(response);
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
+  const fetchData = () => {
+    fetch("http://localhost:4000/", options)
+      .then((response) => response.json())
+      .then((response) => {
+        setData(response);
+        console.log(response[0].event);
+      })
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
-    // fetchData();
     setTimeout(() => {
-      const data = {
-        data: [
-          {
-            event: "lorem empsum text 1",
-          },
-          {
-            event: "lorem empsum text 2",
-          },
-          {
-            event: "lorem empsum text 3",
-          },
-        ],
-      };
-      setData(data);
+      fetchData();
     }, 2000);
   }, []);
 
@@ -59,15 +39,28 @@ const Calendar = () => {
         <Grid pt={4} container spacing={4}>
           <Grid item lg={8} xs={12}>
             {data && (
-              <Box>
-                {data.data.map((event) => (
-                  <Event data={event} key={event._id} />
+              <Grid container>
+                {data.map((day) => (
+                  <Grid item xs={12}>
+                    <Typography variant="h6" component="h2" key={day._id}>
+                      {day.date}
+                    </Typography>
+                    <Box>
+                      {day.events.map((event) => (
+                        <Event data={event} key={event.id} />
+                      ))}
+                    </Box>
+                  </Grid>
                 ))}
-                {/* <Event data={data.data[0]} /> */}
-              </Box>
+              </Grid>
             )}
-            {!data && <MainArticleSkeleton />}
           </Grid>
+
+          {!data && (
+            <Grid item lg={8} xs={12}>
+              {!data && <MainArticleSkeleton />}
+            </Grid>
+          )}
           <Grid item xs={12} lg={4}>
             {data && (
               <Box>

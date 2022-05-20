@@ -8,6 +8,7 @@ import WeekendIcon from "@mui/icons-material/Weekend";
 // Local imports
 
 const Event = ({ data }) => {
+  console.log(data.src);
   return (
     <>
       <Grid
@@ -22,7 +23,7 @@ const Event = ({ data }) => {
         mb={4}
       >
         <Grid item xs={3}>
-          <img className="event-img" src="img.png" />
+          <img className="event-img" src={data.src} />
         </Grid>
         <Grid item xs={9}>
           <Typography
@@ -56,7 +57,9 @@ const Event = ({ data }) => {
                 },
               }}
               variant="subtitle"
-            >{`${Date()}`}</Typography>
+            >
+              {data.time}
+            </Typography>
             <Box
               sx={{
                 backgroundColor: "#111",

@@ -30,7 +30,7 @@ export default function BasicMenu() {
         onClick={handleClick}
         startIcon={<MenuIcon sx={{ fontSize: 40 }} />}
       >
-        Navigate
+        Filters
       </Button>
       <Menu
         id="basic-menu"
