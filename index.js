@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
   }
 });
 
-app.get("/", (req, res) => {
+app.get("/events", (req, res) => {
   const data = [
     {
       _id: 1,
@@ -66,7 +66,7 @@ app.get("/", (req, res) => {
 if (process.env.NODE_ENV == "production") {
   const path = require("path");
 
-  app.get("/events", function (req, res) {
+  app.get("/", function (req, res) {
     app.use(express.static(path.resolve(__dirname, "lyearn", "build")));
     res.sendFile(path.resolve(__dirname, "lyearn", "build", "index.html"));
   });
