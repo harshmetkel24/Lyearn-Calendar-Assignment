@@ -15,11 +15,13 @@ const ArticleSkeleton = () => {
               width={100}
               height={100}
               animation="wave"
+              sx={{ borderRadius: 1 }}
             />
           </Grid>
           <Grid item xs={10}>
             <Box mt={1} mb={1}>
               <Skeleton
+                sx={{ borderRadius: 1 }}
                 variant="text"
                 width={400}
                 height={30}
@@ -27,8 +29,18 @@ const ArticleSkeleton = () => {
               />
             </Box>
             <Box mb={1} style={{ display: "flex", gap: "0.5em" }}>
-              <Skeleton variant="text" width={120} animation="wave" />
-              <Skeleton variant="text" width={120} animation="wave" />
+              <Skeleton
+                sx={{ borderRadius: 1 }}
+                variant="text"
+                width={120}
+                animation="wave"
+              />
+              <Skeleton
+                sx={{ borderRadius: 1 }}
+                variant="text"
+                width={120}
+                animation="wave"
+              />
             </Box>
             <Box mb={1} style={{ display: "flex", gap: "0.5em" }}>
               <Skeleton
@@ -38,6 +50,7 @@ const ArticleSkeleton = () => {
                 animation="wave"
               />
               <Skeleton
+                sx={{ borderRadius: 1 }}
                 variant="text"
                 width={80}
                 height={20}
@@ -50,6 +63,7 @@ const ArticleSkeleton = () => {
                 animation="wave"
               />
               <Skeleton
+                sx={{ borderRadius: 1 }}
                 variant="text"
                 width={80}
                 height={20}

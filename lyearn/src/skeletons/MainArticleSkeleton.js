@@ -11,7 +11,13 @@ const MainArticleSkeleton = () => {
   return (
     <>
       <Box>
-        <Skeleton variant="string" width={200} height={20} animation="wave" />
+        <Skeleton
+          variant="string"
+          width={200}
+          height={20}
+          animation="wave"
+          sx={{ borderRadius: 1 }}
+        />
         <ArticleSkeleton />
         <ArticleSkeleton />
         <Skeleton variant="string" width={200} height={20} animation="wave" />

@@ -84,6 +84,7 @@ const Calendar = () => {
             )}
             {!data && (
               <Skeleton
+                sx={{ borderRadius: 1 }}
                 variant="rectangular"
                 width={350}
                 height={350}
