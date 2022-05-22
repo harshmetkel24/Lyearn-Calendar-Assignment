@@ -46,12 +46,23 @@ const Calendar = () => {
               <Grid container>
                 {data.map((day) => (
                   <Grid item xs={12}>
-                    <Typography variant="h5" component="h2" key={day._id}>
+                    <Typography
+                      pl={1}
+                      component="h2"
+                      sx={{
+                        fontWeight: "600",
+                        fontSize: {
+                          md: "1em",
+                          xs: "0.9em",
+                        },
+                      }}
+                      key={day._id}
+                    >
                       {day.date}
                     </Typography>
                     <Box>
                       {day.events.map((event) => (
-                        <Event data={event} key={event.id} />
+                        <Event data={event} date={day.date} key={event.id} />
                       ))}
                     </Box>
                   </Grid>
@@ -71,7 +82,7 @@ const Calendar = () => {
                 <CalendarComponent />
               </Box>
             )}
-            {!data && (
+            {data && (
               <Skeleton
                 variant="rectangular"
                 width={350}

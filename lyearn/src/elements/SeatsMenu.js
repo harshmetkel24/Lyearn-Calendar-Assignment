@@ -1,8 +1,15 @@
 import React from "react";
 
 // MUI imports
-import { Button, Menu, MenuItem, Checkbox } from "@mui/material";
+import { Button, Menu, MenuItem, Checkbox, Divider } from "@mui/material";
 import SquareIcon from "@mui/icons-material/Square";
+
+// Local imports
+import {
+  SeatsMenuBottomButtons,
+  SeatsMenuCheckBoxButtons,
+  SeatsMenuSeatButton,
+} from "../StyleObjects";
 
 const SeatsMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,22 +23,14 @@ const SeatsMenu = () => {
   return (
     <>
       <Button
+        size="small"
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         variant="outlined"
-        sx={{
-          borderRadius: 4,
-          color: "#000",
-          textTransform: "none",
-          border: "3px solid black",
-          "&:hover": {
-            backgroundColor: "transparent",
-            border: "3px solid black",
-          },
-        }}
+        sx={SeatsMenuSeatButton}
       >
         Seats
       </Button>
@@ -47,29 +46,30 @@ const SeatsMenu = () => {
         <MenuItem>
           <Button
             size="small"
-            sx={{
-              textTransform: "none",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
+            disableElevation
+            disableRipple
+            sx={SeatsMenuCheckBoxButtons}
             startIcon={<SquareIcon htmlColor="#FBBF24" />}
-            endIcon={<Checkbox />}
+            endIcon={
+              <Checkbox
+                size="small"
+                sx={{
+                  color: "#D1D1D1",
+                }}
+              />
+            }
           >
             Filling Fast
           </Button>
         </MenuItem>
         <MenuItem>
           <Button
-            sx={{
-              textTransform: "none",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
+            sx={SeatsMenuCheckBoxButtons}
             size="small"
+            disableElevation
+            disableRipple
             startIcon={<SquareIcon htmlColor="#4C98FB" />}
-            endIcon={<Checkbox />}
+            endIcon={<Checkbox size="small" sx={{ color: "#D1D1D1" }} />}
           >
             Available
           </Button>
@@ -77,16 +77,43 @@ const SeatsMenu = () => {
         <MenuItem>
           <Button
             size="small"
-            sx={{
-              textTransform: "none",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
+            disableElevation
+            disableRipple
+            sx={SeatsMenuCheckBoxButtons}
             startIcon={<SquareIcon htmlColor="#BFBFBF" />}
-            endIcon={<Checkbox />}
+            endIcon={<Checkbox size="small" sx={{ color: "#D1D1D1" }} />}
           >
             Booked
+          </Button>
+        </MenuItem>
+        <Divider variant="middle" />
+        <MenuItem>
+          <Button
+            size="small"
+            variant="text"
+            style={{
+              color: "#999999",
+              backgroundColor: "transparent",
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}
+            sx={SeatsMenuBottomButtons}
+          >
+            Clear
+          </Button>
+          <Button
+            size="small"
+            variant="contained"
+            style={{
+              backgroundColor: "#000",
+              "&:hover": {
+                backgroundColor: "#222",
+              },
+            }}
+            sx={SeatsMenuBottomButtons}
+          >
+            Save
           </Button>
         </MenuItem>
       </Menu>

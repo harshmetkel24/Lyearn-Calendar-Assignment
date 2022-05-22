@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import FilterListIcon from "@mui/icons-material/FilterList";
+
+// Local imports
 import SeatsMenu from "./SeatsMenu";
 
 export default function BasicMenu() {
@@ -27,7 +29,7 @@ export default function BasicMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        startIcon={<MenuIcon sx={{ fontSize: 40 }} />}
+        startIcon={<FilterListIcon sx={{ fontSize: 40 }} />}
       >
         Filters
       </Button>
@@ -40,7 +42,7 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem>
           <SeatsMenu />
         </MenuItem>
         <MenuItem onClick={handleClose}>Design</MenuItem>

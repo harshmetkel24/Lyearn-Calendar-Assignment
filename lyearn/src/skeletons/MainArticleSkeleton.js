@@ -14,6 +14,8 @@ const MainArticleSkeleton = () => {
         <Skeleton variant="string" width={200} height={20} animation="wave" />
         <ArticleSkeleton />
         <ArticleSkeleton />
+        <Skeleton variant="string" width={200} height={20} animation="wave" />
+        <ArticleSkeleton />
         <ArticleSkeleton />
       </Box>
     </>

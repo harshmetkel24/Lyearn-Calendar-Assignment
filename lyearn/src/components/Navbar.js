@@ -2,7 +2,7 @@
 import React from "react";
 
 // MUI imports
-import { AppBar, Grid } from "@mui/material";
+import { AppBar, Divider, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 
 // Local imports
@@ -12,7 +12,7 @@ import SeatsMenu from "../elements/SeatsMenu";
 
 const Navbar = () => {
   return (
-    <AppBar position="static" color="transparent">
+    <AppBar elevation={0} position="static" color="transparent">
       <Grid container p={1} sx={{ justifyContent: "space-between" }}>
         <MenuElement />
         <Grid
@@ -26,20 +26,12 @@ const Navbar = () => {
             },
           }}
         >
-          <Grid container spacing={3}>
+          <Grid container pt={1} spacing={3}>
             <Grid item>
               <SeatsMenu />
             </Grid>
             <Grid item>
-              <Box
-                sx={{
-                  marginLeft: "0",
-                  height: "2.2em",
-                  width: "2px",
-                  backgroundColor: "#EAEAEA",
-                  borderRadius: "40%",
-                }}
-              ></Box>
+              <Divider orientation="vertical" />
             </Grid>
             <Grid item>
               <NavButton name={"Design"} />

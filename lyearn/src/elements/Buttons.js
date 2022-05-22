@@ -6,12 +6,13 @@ import SearchIcon from "@mui/icons-material/Search";
 const NavButton = ({ name }) => {
   return (
     <Button
+      size="small"
+      disableElevation
       sx={{
         backgroundColor: "#F2F2F2",
-        color: "#111",
-        borderRadius: "2em",
+        color: "#222222",
+        borderRadius: 4,
         textTransform: "none",
-        borderRadius: "2em",
         fontWeight: "500",
         "&:hover": {
           backgroundColor: "#D0D0D0",
@@ -29,10 +30,8 @@ const NavButton = ({ name }) => {
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "2em",
-  backgroundColor: "#F8F8F8",
-  "&:hover": {
-    backgroundColor: "#F0F0F0",
-  },
+  backgroundColor: "#FFFFFF",
+  border: "1.5px solid #EAEAEA",
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
@@ -55,6 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
+    color: "#999999",
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
@@ -75,7 +75,7 @@ const SearchButton = ({}) => {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder="Search…"
+        placeholder="Search"
         inputProps={{ "aria-label": "search" }}
       />
     </Search>
