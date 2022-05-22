@@ -82,7 +82,7 @@ const Calendar = () => {
                 <CalendarComponent />
               </Box>
             )}
-            {data && (
+            {!data && (
               <Skeleton
                 variant="rectangular"
                 width={350}

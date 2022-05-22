@@ -16,6 +16,16 @@ const CalendarComponent = () => {
         value={date}
         maxDetail="month"
         minDetail="decade"
+        formatMonthYear={(locale, date) => {
+          const yr = new Intl.DateTimeFormat(locale, {
+            year: "numeric",
+          }).format(date);
+          const mo = new Intl.DateTimeFormat(locale, { month: "long" }).format(
+            date
+          );
+
+          return `${mo}, ${yr}`;
+        }}
       />
     </>
   );
