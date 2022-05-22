@@ -10,6 +10,7 @@ import MainArticleSkeleton from "../skeletons/MainArticleSkeleton";
 import Event from "./Event";
 import CalendarComponent from "./CalendarComponent";
 
+let sendData;
 const Calendar = () => {
   const [data, setData] = useState(null);
   const options = {
@@ -26,6 +27,7 @@ const Calendar = () => {
       .then((response) => response.json())
       .then((response) => {
         setData(response);
+        sendData = response;
         console.log(response[0].event);
       })
       .catch((err) => console.error(err));

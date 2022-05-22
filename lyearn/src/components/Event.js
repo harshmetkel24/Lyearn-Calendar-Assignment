@@ -24,7 +24,7 @@ const Event = ({ data, date }) => {
               display: "inline-block",
               color: "#999999",
               fontWeight: "600",
-              paddingLeft: "1em",
+              paddingLeft: "0.5em",
               fontSize: {
                 md: "1.1em",
                 xs: "0.9em",

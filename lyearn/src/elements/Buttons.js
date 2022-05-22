@@ -1,5 +1,12 @@
-import React from "react";
-import { Button, InputBase } from "@mui/material";
+import { React, useState, useEffect } from "react";
+import {
+  Button,
+  InputBase,
+  TextField,
+  Autocomplete,
+  MenuList,
+  MenuItem,
+} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -68,18 +75,67 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchButton = ({}) => {
+export default function ComboBox() {
+  const options = ["Design", "isha"];
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search"
-        inputProps={{ "aria-label": "search" }}
-      />
-    </Search>
+    <Autocomplete
+      freeSolo
+      options={options.map((option) => option)}
+      renderInput={(params) => <TextField {...params} />}
+    />
+  );
+}
+
+const SearchButton = ({}) => {
+  const data = [
+    "Design",
+    "Product Management",
+    "Mindfullness",
+    "Productivity",
+    "Mental Health",
+  ];
+
+  const filterData = (query, data) => {
+    const ans = data.filter((d) => d.toLowerCase().includes(query));
+    return query !== "" ? ans : null;
+  };
+  const [searchQuery, setSearchQuery] = useState(null);
+  const [dataFiltered, setDataFiltered] = useState(null);
+  useEffect(() => {
+    setDataFiltered(filterData(searchQuery, data));
+  }, [searchQuery]);
+  return (
+    <>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search"
+          inputProps={{ "aria-label": "search" }}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+          }}
+        />
+      </Search>
+      {dataFiltered && (
+        <MenuList sx={{ position: "absolute" }}>
+          {dataFiltered.map((d) => (
+            <MenuItem
+              sx={{
+                fontSize: 12,
+                color: "#444",
+                padding: "0.5em 4em",
+              }}
+              key={d.id}
+            >
+              {d}
+            </MenuItem>
+          ))}
+        </MenuList>
+      )}
+    </>
   );
 };
 
-export { NavButton, SearchButton };
+export { NavButton, SearchButton, ComboBox };
