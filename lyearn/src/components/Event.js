@@ -1,19 +1,33 @@
-import React from "react";
+import { React, useEffect, useState, useContext } from "react";
 
 // MUI imports
-import { Grid, Box, Typography, Button } from "@mui/material";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import WeekendIcon from "@mui/icons-material/Weekend";
-import {
-  EventResisteredStatusButton,
-  EventStatusDetailsButton,
-  EventTimeDetails,
-  RoundBlackBox,
-} from "../StyleObjects";
+import { Box, Typography } from "@mui/material";
 
 // Local imports
 
+import { ClickedContext, FilterContext } from "../App";
+import EventsUtil from "../elements/EventsUtil";
+
 const Event = ({ data, date }) => {
+  const { filters } = useContext(FilterContext);
+  const { clicked } = useContext(ClickedContext);
+  const [newData, setNewData] = useState(null);
+  useEffect(() => {
+    let temp = [];
+    clicked.map((item, index) => {
+      if (item) {
+        temp.push(filters[index]);
+      }
+    });
+    for (let i = 0; i < temp.length; ++i)
+      if (temp[i] === data.genre) {
+        setNewData(data);
+        break;
+      } else setNewData(null);
+    console.log(newData);
+  }, [clicked]);
+
+  // console.log(data);
   return (
     <>
       {!data.event && (
@@ -33,80 +47,8 @@ const Event = ({ data, date }) => {
           >{`No sessions scheduled for ${date}`}</Typography>
         </Box>
       )}
-      {data.event && (
-        <Grid
-          container
-          m={1}
-          sx={{
-            width: {
-              sm: "100%",
-              xs: "100vw",
-            },
-          }}
-          mb={4}
-        >
-          <Grid item xs={3}>
-            <img className="event-img" src={data.src} />
-          </Grid>
-          <Grid item xs={9}>
-            <Typography
-              noWrap
-              mb={1}
-              mt={1}
-              variant="h2"
-              sx={{
-                fontWeight: 600,
-                fontSize: {
-                  md: 18,
-                  xs: 15,
-                },
-              }}
-            >
-              {data.event}
-            </Typography>
-            <Box sx={{ display: "flex", gap: "0.5em" }}>
-              <Typography sx={EventTimeDetails} variant="subtitle">
-                {data.time}
-              </Typography>
-              <Box sx={RoundBlackBox}></Box>
-              <Typography variant="text" sx={EventTimeDetails}>
-                {`${data.duration} mins`}
-              </Typography>
-            </Box>
-            {!data.status.registered && (
-              <Box sx={{ display: "flex", gap: "1em" }}>
-                <Button
-                  disableElevation
-                  disableRipple
-                  sx={EventStatusDetailsButton}
-                  startIcon={<PeopleOutlineIcon sx={{ color: "#999999" }} />}
-                >
-                  {`${data.status.attending} attending`}
-                </Button>
-                <Button
-                  disableElevation
-                  disableRipple
-                  sx={EventStatusDetailsButton}
-                  startIcon={<WeekendIcon />}
-                >
-                  {`${data.status.seats} seats left`}
-                </Button>
-              </Box>
-            )}
-            {data.status.registered && (
-              <Button
-                variant="contained"
-                disableElevation
-                disableRipple
-                size="small"
-                sx={EventResisteredStatusButton}
-              >
-                Registered
-              </Button>
-            )}
-          </Grid>
-        </Grid>
-      )}
+      {data.event && newData && <EventsUtil data={newData} />}
+      {/* {!newData && data.event && <EventsUtil data={data} />} */}
     </>
   );
 };

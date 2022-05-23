@@ -1,36 +1,8 @@
-import { React, useState, useEffect } from "react";
-import {
-  Button,
-  InputBase,
-  TextField,
-  Autocomplete,
-  MenuList,
-  MenuItem,
-} from "@mui/material";
+import { React, useState, useEffect, useContext } from "react";
+import { InputBase, MenuList, MenuItem } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-
-const NavButton = ({ name }) => {
-  return (
-    <Button
-      size="small"
-      disableElevation
-      sx={{
-        backgroundColor: "#F2F2F2",
-        color: "#222222",
-        borderRadius: 4,
-        textTransform: "none",
-        fontWeight: "500",
-        "&:hover": {
-          backgroundColor: "#D0D0D0",
-        },
-      }}
-      variant="contained"
-    >
-      {name}
-    </Button>
-  );
-};
+import { FilterContext } from "../App";
 
 // Search button code
 
@@ -75,25 +47,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function ComboBox() {
-  const options = ["Design", "isha"];
-  return (
-    <Autocomplete
-      freeSolo
-      options={options.map((option) => option)}
-      renderInput={(params) => <TextField {...params} />}
-    />
-  );
-}
-
-const SearchButton = ({}) => {
-  const data = [
-    "Design",
-    "Product Management",
-    "Mindfullness",
-    "Productivity",
-    "Mental Health",
-  ];
+const SearchButton = () => {
+  const { filters } = useContext(FilterContext);
+  const [data, setData] = useState(filters);
+  useEffect(() => {
+    setData(filters);
+  }, [filters]);
 
   const filterData = (query, data) => {
     const ans = data.filter((d) => d.toLowerCase().includes(query));
@@ -138,4 +97,4 @@ const SearchButton = ({}) => {
   );
 };
 
-export { NavButton, SearchButton, ComboBox };
+export { SearchButton };
