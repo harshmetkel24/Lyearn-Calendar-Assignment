@@ -9,25 +9,6 @@ import { ClickedContext, FilterContext } from "../App";
 import EventsUtil from "../elements/EventsUtil";
 
 const Event = ({ data, date }) => {
-  const { filters } = useContext(FilterContext);
-  const { clicked } = useContext(ClickedContext);
-  const [newData, setNewData] = useState(null);
-  useEffect(() => {
-    let temp = [];
-    clicked.map((item, index) => {
-      if (item) {
-        temp.push(filters[index]);
-      }
-    });
-    for (let i = 0; i < temp.length; ++i)
-      if (temp[i] === data.genre) {
-        setNewData(data);
-        break;
-      } else setNewData(null);
-    console.log(newData);
-  }, [clicked]);
-
-  // console.log(data);
   return (
     <>
       {!data.event && (
@@ -47,8 +28,7 @@ const Event = ({ data, date }) => {
           >{`No sessions scheduled for ${date}`}</Typography>
         </Box>
       )}
-      {data.event && newData && <EventsUtil data={newData} />}
-      {/* {!newData && data.event && <EventsUtil data={data} />} */}
+      {data.event && <EventsUtil data={data} />}
     </>
   );
 };
