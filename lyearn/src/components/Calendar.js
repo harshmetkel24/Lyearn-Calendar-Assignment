@@ -20,20 +20,19 @@ const Calendar = () => {
 
   const fetchData = () => {
     const url =
-      process.env.NODE_ENV == "production"
+      process.env.NODE_ENV === "production"
         ? "/events/"
         : "http://localhost:4000/events";
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
         setData(response);
-        console.log(response[0].event);
       })
       .catch((err) => console.error(err));
   };
   const { filters } = useContext(FilterContext);
   const { clicked } = useContext(ClickedContext);
-  const [newData, setNewData] = useState(null);
+  const [newData, setNewData] = useState(false);
   useEffect(() => {
     let temp = [];
     clicked.map((item, index) => {
@@ -45,10 +44,9 @@ const Calendar = () => {
     if (data && temp.length) {
       data.map((day) => {
         let row = [];
-        if (day) {
+        if (day.events) {
           day.events.map((event) => {
             if (event) {
-              console.log(event);
               for (let i = 0; i < temp.length; ++i)
                 if (temp[i] === event.genre) {
                   row.push(event);
@@ -60,24 +58,26 @@ const Calendar = () => {
         if (row.length) update.push(row);
       });
     }
-    setNewData(update);
-    console.log(newData);
+    setNewData(!newData);
+    setData(update);
   }, [clicked]);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchData();
-    }, 2000);
-  }, []);
+    if (!newData) {
+      setTimeout(() => {
+        fetchData();
+      }, 2000);
+    }
+  }, [newData]);
 
   return (
     <>
       <Container fluid>
         <Grid pt={4} container spacing={4}>
           <Grid item lg={8} xs={12}>
-            {data && !newData.length && (
+            {data && (
               <Grid container>
-                {data.map((day) => (
+                {data.map((day, index) => (
                   <Grid item xs={12}>
                     <Typography
                       pl={1}
@@ -89,41 +89,19 @@ const Calendar = () => {
                           xs: "0.9em",
                         },
                       }}
-                      key={day._id}
+                      key={index}
                     >
                       {day.date}
                     </Typography>
                     <Box>
-                      {day.events.map((event) => (
-                        <Event data={event} date={day.date} key={event.id} />
-                      ))}
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            )}
-            {data && newData && (
-              <Grid container>
-                {newData.map((day) => (
-                  <Grid item xs={12}>
-                    <Typography
-                      pl={1}
-                      component="h2"
-                      sx={{
-                        fontWeight: "600",
-                        fontSize: {
-                          md: "1em",
-                          xs: "0.9em",
-                        },
-                      }}
-                      key={day._id}
-                    >
-                      {day.date}
-                    </Typography>
-                    <Box>
-                      {day.map((event) => (
-                        <Event data={event} date={day.date} key={event.id} />
-                      ))}
+                      {day.events &&
+                        day.events.map((event) => (
+                          <Event data={event} date={day.date} key={event.id} />
+                        ))}
+                      {day.length &&
+                        day.map((event) => (
+                          <Event data={event} date={day.date} key={event.id} />
+                        ))}
                     </Box>
                   </Grid>
                 ))}
